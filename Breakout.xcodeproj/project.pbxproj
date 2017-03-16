@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F47F6721E7AEFFA001FB88B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47F6711E7AEFFA001FB88B /* MenuViewController.swift */; };
 		3F94E29A1E71B5F500DD7A3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94E2991E71B5F500DD7A3D /* AppDelegate.swift */; };
 		3F94E29C1E71B5F500DD7A3D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F94E29B1E71B5F500DD7A3D /* GameScene.sks */; };
 		3F94E29E1E71B5F500DD7A3D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F94E29D1E71B5F500DD7A3D /* Actions.sks */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F47F6711E7AEFFA001FB88B /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3F94E2961E71B5F500DD7A3D /* Breakout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breakout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F94E2991E71B5F500DD7A3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F94E29B1E71B5F500DD7A3D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				3F94E29B1E71B5F500DD7A3D /* GameScene.sks */,
 				3F94E29D1E71B5F500DD7A3D /* Actions.sks */,
 				3F94E29F1E71B5F500DD7A3D /* GameScene.swift */,
+				3F47F6711E7AEFFA001FB88B /* MenuViewController.swift */,
 				3F94E2A11E71B5F500DD7A3D /* GameViewController.swift */,
 				3F94E2A31E71B5F500DD7A3D /* Main.storyboard */,
 				3F94E2A61E71B5F500DD7A3D /* Assets.xcassets */,
@@ -150,6 +153,7 @@
 				3F94E2A01E71B5F500DD7A3D /* GameScene.swift in Sources */,
 				3F94E2A21E71B5F500DD7A3D /* GameViewController.swift in Sources */,
 				3F94E29A1E71B5F500DD7A3D /* AppDelegate.swift in Sources */,
+				3F47F6721E7AEFFA001FB88B /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +315,7 @@
 				3F94E2B01E71B5F500DD7A3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
