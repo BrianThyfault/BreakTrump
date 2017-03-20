@@ -154,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.clicked(self.timing.numberOfTries = 1)
             self.clicked(self.timing.onTime = true)
             self.imageView.image = UIImage(named: "")
-            //resets game
+            //resets game\////gyjhhjghj
             
             
             
