@@ -30,6 +30,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         makeLoseZone()
         
         ball.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 3))
+        
+        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -56,6 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if(brickHit == 3)
             {
                 brick.removeFromParent()
+                winOrLose()
             }
         }
         else if(contact.bodyA.node?.name == "loseZone" || contact.bodyB.node?.name == "loseZone")
@@ -63,11 +66,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("You Lose")
             ball.removeFromParent()
             let alert = UIAlertController(title: "You Lose!", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Menu", style: .default, handler: { (sender) in
-                let segue = UIStoryboardSegue(identifier: "menu", source: GameViewController, destination: MenuViewController)
-                perform(segue)
-                
-            }))
+//            alert.addAction(UIAlertAction(title: "Menu", style: .default, handler: { (sender) in
+//                let segue = UIStoryboardSegue(identifier: "menu", source: GameViewController, destination: MenuViewController)
+//                perform(segue)
+//                
+//            }))
         }
     }
     
@@ -108,7 +111,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
         
         ball.physicsBody?.affectedByGravity = false
+        ball.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 3))
         addChild(ball)
+        
     }
     
     func makePaddle()
@@ -142,28 +147,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loseZone.physicsBody?.isDynamic = false
         addChild(loseZone)
     }
-    func whatWasYourTime(_ time:String)
+    
+    func winOrLose()
     {
-        let alert = UIAlertController(title:time
-            , message: nil, preferredStyle: UIAlertControllerStyle.alert)
-        let resetButton = UIAlertAction(title: "play again", style: .default, handler: { (sender) in
+        let alert = UIAlertController(title:"You win!", message: nil, preferredStyle: .alert)
+        let nextButton = UIAlertAction(title: "Next Level", style: .default, handler: { (sender) in
             
-            self.instructions.backgroundColor = UIColor.blue
-            self.view.backgroundColor = UIColor.blue
-            self.instructions.text = ""
-            self.clicked(self.timing.numberOfTries = 1)
-            self.clicked(self.timing.onTime = true)
-            self.imageView.image = UIImage(named: "")
-            //resets game\////gyjhhjghj
+            self.createBackground()
+            self.makeBall()
+            self.makePaddle()
+            self.makeBrick()
+            self.makeLoseZone()
             
-            
-            
+            self.ball.physicsBody?.applyImpulse(CGVector(dx: 1, dy: 1))
+ 
         })
-        alert.addAction(resetButton)
-        self.present(alert, animated: true, completion: nil )}
-    //adds reset button to alert
+        alert.addAction(nextButton)
+        self.view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        
+    }
     
 }
 
-}
+
 
