@@ -135,6 +135,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loseZone.physicsBody?.isDynamic = false
         addChild(loseZone)
     }
+    func whatWasYourTime(_ time:String)
+    {
+        let alert = UIAlertController(title:time
+            , message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let resetButton = UIAlertAction(title: "play again", style: .default, handler: { (sender) in
+            
+            self.instructions.backgroundColor = UIColor.blue
+            self.view.backgroundColor = UIColor.blue
+            self.instructions.text = ""
+            self.clicked(self.timing.numberOfTries = 1)
+            self.clicked(self.timing.onTime = true)
+            self.imageView.image = UIImage(named: "")
+            //resets game
+            
+            
+            
+        })
+        alert.addAction(resetButton)
+        self.present(alert, animated: true, completion: nil )}
+    //adds reset button to alert
     
+}
+
 }
 
