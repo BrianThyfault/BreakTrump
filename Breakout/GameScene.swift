@@ -61,6 +61,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if(contact.bodyA.node?.name == "loseZone" || contact.bodyB.node?.name == "loseZone")
         {
             print("You Lose")
+            ball.removeFromParent()
+            let alert = UIAlertController(title: "You Lose!", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Menu", style: .default, handler: { (sender) in
+                let segue = UIStoryboardSegue(identifier: "menu", source: GameViewController, destination: MenuViewController)
+                perform(segue)
+                
+            }))
         }
     }
     
