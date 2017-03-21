@@ -26,7 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createBackground()
         makeBall()
         makePaddle()
-        makeBrick()
+         createBlocks()
         makeLoseZone()
         
         ball.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 3))
@@ -121,14 +121,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(paddle)
     }
     
-    func makeBrick()
+    func createBlocks()
     {
-        brick = SKSpriteNode(color: UIColor.green, size: CGSize(width: frame.width/3, height: frame.height/25))
+        var xPosition = Int(frame.midX - (frame.width / 2))
+        var yPosition = 150
+        
+        let blockWidth = (Int)((frame.width - 60 / 5))
+        let blockHeight = 20
+        
+        for rows in 1...3
+        {
+            for columns in 1...5
+            {
+                makeBrick(makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight))
+                xPosition += (blockWidth + 10)
+            }
+            xPosition = Int(frame.midX - (frame.width / 2))
+            yPosition += (blockHeight + 10)
+        }
+    }
+    
+    func makeBrick(xPoint: Int, yPoint: Int, brickWidth: Int, brickHeight: Int)
+    {
+        brick = SKSpriteNode(color: UIColor.blue, size: CGSize(width: frame.width / 3, height: frame.height / 25))
         brick.position = CGPoint(x: frame.midX, y: frame.maxY - 30)
         brick.name = "brick"
         brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
         brick.physicsBody?.isDynamic = false
-        brick.texture = (SKTexture(imageNamed: "DJT Head"))
         addChild(brick)
         
     }
@@ -142,28 +161,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loseZone.physicsBody?.isDynamic = false
         addChild(loseZone)
     }
-    func whatWasYourTime(_ time:String)
-    {
-        let alert = UIAlertController(title:time
-            , message: nil, preferredStyle: UIAlertControllerStyle.alert)
-        let resetButton = UIAlertAction(title: "play again", style: .default, handler: { (sender) in
-            
-            self.instructions.backgroundColor = UIColor.blue
-            self.view.backgroundColor = UIColor.blue
-            self.instructions.text = ""
-            self.clicked(self.timing.numberOfTries = 1)
-            self.clicked(self.timing.onTime = true)
-            self.imageView.image = UIImage(named: "")
-            //resets game\////gyjhhjghj
-            
-            
-            
-        })
-        alert.addAction(resetButton)
-        self.present(alert, animated: true, completion: nil )}
-    //adds reset button to alert
+       //adds reset button to alert
     
 }
 
-}
+
 
