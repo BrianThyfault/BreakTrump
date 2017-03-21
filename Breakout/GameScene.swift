@@ -26,7 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createBackground()
         makeBall()
         makePaddle()
-         createBlocks()
+        createBlocks()
         makeLoseZone()
         
         ball.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 3))
@@ -138,17 +138,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             for columns in 1...5
             {
-                makeBrick(makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight))
+                makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight)
                 xPosition += (blockWidth + 10)
+                
+                xPosition = Int(frame.midX - (frame.width / 2))
+                yPosition += (blockHeight + 10)
             }
-            xPosition = Int(frame.midX - (frame.width / 2))
-            yPosition += (blockHeight + 10)
         }
     }
     
     func makeBrick(xPoint: Int, yPoint: Int, brickWidth: Int, brickHeight: Int)
     {
-        brick = SKSpriteNode(color: UIColor.blue, size: CGSize(width: frame.width / 3, height: frame.height / 25))
+        brick = SKSpriteNode(color: UIColor.blue, size: CGSize(width: brickWidth, height: brickHeight))
         brick.position = CGPoint(x: frame.midX, y: frame.maxY - 30)
         brick.name = "brick"
         brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
@@ -175,7 +176,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.createBackground()
             self.makeBall()
             self.makePaddle()
-            self.makeBrick()
             self.makeLoseZone()
             
             self.ball.physicsBody?.applyImpulse(CGVector(dx: 1, dy: 1))
