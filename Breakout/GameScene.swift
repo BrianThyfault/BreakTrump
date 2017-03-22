@@ -150,7 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func makeBrick(xPoint: Int, yPoint: Int, brickWidth: Int, brickHeight: Int)
     {
         brick = SKSpriteNode(color: UIColor.blue, size: CGSize(width: brickWidth, height: brickHeight))
-        brick.position = CGPoint(x: frame.midX, y: frame.maxY - 30)
+        brick.position = CGPoint(x: xPoint, y: yPoint)
         brick.name = "brick"
         brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
         brick.physicsBody?.isDynamic = false
