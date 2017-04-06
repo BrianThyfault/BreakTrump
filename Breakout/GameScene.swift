@@ -16,7 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var brick:SKSpriteNode!
     var loseZone:SKSpriteNode!
     var brickHit = 0
-    
+    var numberOfBricks = 0
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -51,22 +51,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        var numberOfBricks = 15
         if(contact.bodyA.node?.name == "brick" || contact.bodyB.node?.name == "brick")
         {
+            
             print("Brick Hit")
             brickHit += 1
-            if(brickHit == 3)
+            if (brickHit == 3)
             {
                 brick.removeFromParent()
-                winOrLose()
+                numberOfBricks - 1
             }
+            if numberOfBricks == 0 {
+                  winOrLose(string: "You won.")       }
         }
+
         else if(contact.bodyA.node?.name == "loseZone" || contact.bodyB.node?.name == "loseZone")
         {
             print("You Lose")
             ball.removeFromParent()
-            let alert = UIAlertController(title: "You Lose!", message: nil, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Menu", style: .default, handler: { (sender) in
+           //            alert.addAction(UIAlertAction(title: "Menu", style: .default, handler: { (sender) in
 //                let segue = UIStoryboardSegue(identifier: "menu", source: GameViewController, destination: MenuViewController)
 //                perform(segue)
 //                
@@ -141,11 +145,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight)
                 xPosition += (blockWidth + 10)
                 
-                xPosition = Int(frame.midX - (frame.width / 2))
-                yPosition += (blockHeight + 10)
-            }
+                            }
+            xPosition = Int(frame.midX - (frame.width / 2))
+            yPosition += (blockHeight + 10)
+
         }
     }
+    
+    
     
     func makeBrick(xPoint: Int, yPoint: Int, brickWidth: Int, brickHeight: Int)
     {
@@ -168,8 +175,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(loseZone)
     }
     
-    func winOrLose()
+    func winOrLose(string: String)
     {
+        
         let alert = UIAlertController(title:"You win!", message: nil, preferredStyle: .alert)
         let nextButton = UIAlertAction(title: "Next Level", style: .default, handler: { (sender) in
             
