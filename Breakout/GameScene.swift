@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-
+var brickss = bricks()
     var ball: SKSpriteNode!
     var paddle: SKSpriteNode!
     var brick:SKSpriteNode!
