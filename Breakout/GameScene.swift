@@ -60,7 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (brickHit == 3)
             {
                 brick.removeFromParent()
-                numberOfBricks - 1
+                numberOfBricks -= 1
             }
             if numberOfBricks == 0 {
                   winOrLose(string: "You won.")       }
@@ -138,17 +138,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let blockWidth = (Int)((frame.width - 60 / 5))
         let blockHeight = 20
         
-        for rows in 1...3
+        for _ in 1...3
         {
-            for columns in 1...5
+            for _ in 1...5
             {
                 makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight)
                 xPosition += (blockWidth + 10)
-                
                             }
             xPosition = Int(frame.midX - (frame.width / 2))
             yPosition += (blockHeight + 10)
-
         }
     }
     
