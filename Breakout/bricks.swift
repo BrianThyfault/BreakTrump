@@ -35,6 +35,7 @@ var brick15:SKSpriteNode!
         brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
         brick.physicsBody?.isDynamic = false
         addChild(brick)
+        print("Bricks Made")
         
     }
     

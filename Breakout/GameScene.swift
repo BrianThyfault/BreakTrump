@@ -10,13 +10,15 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-var brickClass = bricks()
+    
+    var brickClass = bricks()
     var ball: SKSpriteNode!
     var paddle: SKSpriteNode!
     var loseZone:SKSpriteNode!
     var brickHit = 0
     var numberOfBricks = 0
     var level = 1
+    var brick: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -30,8 +32,6 @@ var brickClass = bricks()
         makeLoseZone()
         
         ball.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 3))
-        
-        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -139,13 +139,13 @@ var brickClass = bricks()
         let blockWidth = (Int)((frame.width - 60 / 5))
         let blockHeight = 20
         
-        for _ in 1...3
+        for _ in 1...numOfBricks
         {
-            for _ in 1...5
+            for _ in 1...numOfBricks
             {
-                brickClass.makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight)
+                makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight)
                 xPosition += (blockWidth + 10)
-                            }
+            }
             xPosition = Int(frame.midX - (frame.width / 2))
             yPosition += (blockHeight + 10)
         }
@@ -175,6 +175,18 @@ var brickClass = bricks()
         })
         alert.addAction(nextButton)
         self.view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func makeBrick(xPoint: Int, yPoint: Int, brickWidth: Int, brickHeight: Int)
+    {
+        brick = SKSpriteNode(color: UIColor.blue, size: CGSize(width: brickWidth, height: brickHeight))
+        brick.position = CGPoint(x: xPoint, y: yPoint)
+        brick.name = "brick"
+        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+        brick.physicsBody?.isDynamic = false
+        addChild(brick)
+        print("Bricks Made")
         
     }
     
