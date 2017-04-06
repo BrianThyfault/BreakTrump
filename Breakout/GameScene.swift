@@ -10,13 +10,13 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-var brickss = bricks()
+var brickClass = bricks()
     var ball: SKSpriteNode!
     var paddle: SKSpriteNode!
-    var brick:SKSpriteNode!
     var loseZone:SKSpriteNode!
     var brickHit = 0
     var numberOfBricks = 0
+    var level = 1
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -26,7 +26,7 @@ var brickss = bricks()
         createBackground()
         makeBall()
         makePaddle()
-        createBlocks()
+        createBlocks(numOfBricks: level)
         makeLoseZone()
         
         ball.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 3))
@@ -59,7 +59,7 @@ var brickss = bricks()
             brickHit += 1
             if (brickHit == 3)
             {
-                brick.removeFromParent()
+                brickClass.removeFromParent()
                 numberOfBricks -= 1
             }
             if numberOfBricks == 0 {
@@ -70,6 +70,7 @@ var brickss = bricks()
         {
             print("You Lose")
             ball.removeFromParent()
+            winOrLose(string: "Lose")
            //            alert.addAction(UIAlertAction(title: "Menu", style: .default, handler: { (sender) in
 //                let segue = UIStoryboardSegue(identifier: "menu", source: GameViewController, destination: MenuViewController)
 //                perform(segue)
@@ -130,7 +131,7 @@ var brickss = bricks()
         addChild(paddle)
     }
     
-    func createBlocks()
+    func createBlocks(numOfBricks: Int)
     {
         var xPosition = Int(frame.midX - (frame.width / 2))
         var yPosition = 150
@@ -142,25 +143,12 @@ var brickss = bricks()
         {
             for _ in 1...5
             {
-                makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight)
+                brickClass.makeBrick(xPoint: xPosition, yPoint: yPosition, brickWidth: blockWidth, brickHeight: blockHeight)
                 xPosition += (blockWidth + 10)
                             }
             xPosition = Int(frame.midX - (frame.width / 2))
             yPosition += (blockHeight + 10)
         }
-    }
-    
-    
-    
-    func makeBrick(xPoint: Int, yPoint: Int, brickWidth: Int, brickHeight: Int)
-    {
-        brick = SKSpriteNode(color: UIColor.blue, size: CGSize(width: brickWidth, height: brickHeight))
-        brick.position = CGPoint(x: xPoint, y: yPoint)
-        brick.name = "brick"
-        brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-        brick.physicsBody?.isDynamic = false
-        addChild(brick)
-        
     }
     
     func makeLoseZone()
@@ -178,14 +166,12 @@ var brickss = bricks()
         
         let alert = UIAlertController(title:"You win!", message: nil, preferredStyle: .alert)
         let nextButton = UIAlertAction(title: "Next Level", style: .default, handler: { (sender) in
-            
+            self.ball.removeFromParent()
+            self.level += 1
             self.createBackground()
-            self.makeBall()
-            self.makePaddle()
+            self.createBlocks(numOfBricks: self.level)
             self.makeLoseZone()
             
-            self.ball.physicsBody?.applyImpulse(CGVector(dx: 1, dy: 1))
- 
         })
         alert.addAction(nextButton)
         self.view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
